@@ -13,18 +13,22 @@ info:
     url: https://mymarkit-production.s3.amazonaws.com/img/logos/logo-header.svg
   description: "This is an **example** API to demonstrate features of the OpenAPI specification.\r\n\r\n# Introduction\r\n\r\nThis API implementation guide is intended to to be a good starting point for\r\nimplementing various MyMarkit SaaS products.\r\n\r\n[Company Site](https://mymarkit.com).\r\n"
 tags:
-  - name: Payment with Adyen
-    description: Universal Payment Processor with Adyen.
-  - name: Payment with Coinbase
-    description: Universal Payment Processor with Coinbase Commerce.
+  - name: Payment with Fiat
+    description: Universal Payment Processor with Fiat.
+  - name: Payment with Crypto
+    description: Universal Payment Processor with Crypto.
+  - name: Webhook confirmation from Fiat
+    description: Webhook confirmation from Universal Payment Processor with Fiat.
+  - name: Webhook confirmation from Crypto
+    description: Webhook confirmation from Universal Payment Processor with Crypto.    
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
 paths:
   /api/v1/payments/adyen:
     post:
       tags:
-        - Payment with Adyen
-      summary: Create a payment page with Adyen
+        - Payment with Fiat
+      summary: Create a payment page with Adyen Fiat
       description: >-
         Create a universal payment page loaded with payment methods from Adyen
         dashboard
@@ -55,12 +59,11 @@ paths:
               $ref: '#/components/schemas/PaymentAdyen'
         description: Payment payload
         required: true
-
   /api/v1/payments/coinbase:
     post:
       tags:
-        - Payment with Coinbase
-      summary: Create a payment page with Coinbase Commerce
+        - Payment with Crypto
+      summary: Create a payment page with Crypto
       description: >-
         Create a universal payment page loaded with payment methods from
         Coinbase Commerce dashboard
@@ -91,14 +94,12 @@ paths:
               $ref: '#/components/schemas/PaymentCoinbase'
         description: Payment payload
         required: true
-
   /user-provided-url-for-webhook-adyen:
     post:
       tags:
-        - Webhook response with Adyen Payment
+        - Webhook confirmation from Fiat
       summary: Create a webhook confirmation response from Adyen payment
-      description: >-
-        Create a webhook JSON confirmation response page from Adyen payment
+      description: Create a webhook JSON confirmation response page from Adyen payment
       operationId: WebhookAdyenPayment
       security:
         - ApiKeyAuth: []
@@ -125,15 +126,13 @@ paths:
             schema:
               $ref: '#/components/schemas/WebhookAdyenRequest'
         description: webhook request body
-        required: true        
-        
+        required: true
   /user-provided-url-for-webhook-coinbase:
     post:
       tags:
-        - Webhook response with Coinbase Payment
-      summary: Create a webhook confirmation response from Coinbase payment
-      description: >-
-        Create a webhook JSON confirmation response page from Coinbase payment
+        - Webhook confirmation from Crypto
+      summary: Create a webhook confirmation response from Crypto payment
+      description: Create a webhook JSON confirmation response page from Crypto payment
       operationId: WebhookCoinbasePayment
       security:
         - ApiKeyAuth: []
@@ -160,8 +159,7 @@ paths:
             schema:
               $ref: '#/components/schemas/WebhookCoinbaseRequest'
         description: webhook request body
-        required: true        
-
+        required: true
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -181,7 +179,7 @@ components:
           description: total amount to pay
           type: string
           minLength: 1
-          example: "100.15"
+          example: '100.15'
         currency:
           description: currency
           type: string
@@ -222,7 +220,7 @@ components:
           description: total amount to pay
           type: string
           minLength: 1
-          example: "100.15"
+          example: '100.15'
         currency:
           description: currency
           type: string
@@ -291,7 +289,7 @@ components:
               paymentMethod: ideal
               pspReference: QW2KB9G5F4BLNK82
               reason: ''
-              success: 'true'       
+              success: 'true'
     WebhookCoinbaseRequest:
       type: object
       properties:
@@ -431,7 +429,7 @@ components:
                 USDT-EUR: '0.96'
             id: b180df29-0c27-44e1-9129-3d8cab79ce18
             resource: event
-            type: charge:created              
+            type: charge:created
   headers:
     ExpiresAfter:
       description: date in UTC when token expires
