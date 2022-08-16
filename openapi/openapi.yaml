@@ -13,24 +13,24 @@ info:
     url: https://mymarkit-production.s3.amazonaws.com/img/logos/logo-header.svg
   description: "This is an **example** API to demonstrate features of the OpenAPI specification.\r\n\r\n# Introduction\r\n\r\nThis API implementation guide is intended to to be a good starting point for\r\nimplementing various MyMarkit SaaS products.\r\n\r\n[Company Site](https://mymarkit.com).\r\n"
 tags:
-  - name: Payment with Fiat
-    description: Universal Payment Processor with Fiat.
-  - name: Payment with Crypto
-    description: Universal Payment Processor with Crypto.
-  - name: Webhook confirmation from Fiat
-    description: Webhook confirmation from Universal Payment Processor with Fiat.
-  - name: Webhook confirmation from Crypto
-    description: Webhook confirmation from Universal Payment Processor with Crypto.    
+  - name: Payment with MarkitPay (Fiat)
+    description: Universal Payment Processor with MarkitPay (Fiat).
+  - name: Payment with MarkitPay (Crypto)
+    description: Universal Payment Processor with MarkitPay (Crypto).
+  - name: Webhook confirmation from MarkitPay (Fiat)
+    description: Webhook confirmation from Universal Payment Processor with MarkitPay (Fiat).
+  - name: Webhook confirmation from MarkitPay (Crypto)
+    description: Webhook confirmation from Universal Payment Processor with MarkitPay (Crypto).    
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
 paths:
   /api/v1/payments/adyen:
     post:
       tags:
-        - Payment with Fiat
-      summary: Create a payment page with Adyen Fiat
+        - Payment with MarkitPay (Fiat)
+      summary: Create a payment page with MarkitPay (Fiat)
       description: >-
-        Create a universal payment page loaded with payment methods from Adyen
+        Create a universal payment page loaded with payment methods from MarkitPay (Fiat)
         dashboard
       operationId: UniversalAdyenPayment
       security:
@@ -62,11 +62,11 @@ paths:
   /api/v1/payments/coinbase:
     post:
       tags:
-        - Payment with Crypto
-      summary: Create a payment page with Crypto
+        - Payment with MarkitPay (Crypto)
+      summary: Create a payment page with MarkitPay (Crypto)
       description: >-
         Create a universal payment page loaded with payment methods from
-        Coinbase Commerce dashboard
+        MarkitPay (Crypto) dashboard
       operationId: UniversalCoinbasePayment
       security:
         - ApiKeyAuth: []
@@ -97,9 +97,9 @@ paths:
   /user-provided-url-for-webhook-adyen:
     post:
       tags:
-        - Webhook confirmation from Fiat
-      summary: Create a webhook confirmation response from Adyen payment
-      description: Create a webhook JSON confirmation response page from Adyen payment
+        - Webhook confirmation from MarkitPay (Fiat)
+      summary: Create a webhook confirmation response from MarkitPay (Fiat) payment
+      description: Create a webhook JSON confirmation response page from MarkitPay (Fiat) payment
       operationId: WebhookAdyenPayment
       security:
         - ApiKeyAuth: []
@@ -130,9 +130,9 @@ paths:
   /user-provided-url-for-webhook-coinbase:
     post:
       tags:
-        - Webhook confirmation from Crypto
-      summary: Create a webhook confirmation response from Crypto payment
-      description: Create a webhook JSON confirmation response page from Crypto payment
+        - Webhook confirmation from MarkitPay (Crypto)
+      summary: Create a webhook confirmation response from MarkitPay (Crypto) payment
+      description: Create a webhook JSON confirmation response page from MarkitPay (Crypto) payment
       operationId: WebhookCoinbasePayment
       security:
         - ApiKeyAuth: []
