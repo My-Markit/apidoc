@@ -306,6 +306,11 @@ components:
     CreateMarkitChain:
       type: object
       properties:
+        ledger_id:
+          description: ledger_id of the product customer wants to create
+          type: integer
+          minLength: 1
+          example: 123         
         product_type:
           description: product type
           type: string
