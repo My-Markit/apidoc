@@ -21,10 +21,10 @@ tags:
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Fiat).
   - name: Webhook confirmation from MarkitPay (Crypto)
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Crypto).
-  - name: Create Supply Chain with MarkitChain
-    description: Create Supply Chain with MarkitChain.        
-  - name: Search Supply Chain with MarkitChain
-    description: Search Supply Chain with MarkitChain.       
+  - name: Create an entry with MarkitChain
+    description: Create an entry with MarkitChain.        
+  - name: Search for an entry with MarkitChain
+    description: Search for an entry with MarkitChain.       
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
 paths:
@@ -167,10 +167,10 @@ paths:
   /api/v1/markitchain/create:
     post:
       tags:
-        - Create Supply Chain with MarkitChain
-      summary: Create a Blockchain ledger in MarkitChain
+        - Create an entry with MarkitChain
+      summary: Create a Blockchain ledger entry in MarkitChain
       description: >-
-        Create a Blockchain ledger in MarkitChain from customer request
+        Create a Blockchain ledger entry in MarkitChain from customer request
       operationId: CreateMarkitChain
       security:
         - ApiKeyAuth: []
@@ -201,10 +201,10 @@ paths:
   /api/v1/markitchain/search:
     get:
       tags:
-        - Search Supply Chain with MarkitChain
-      summary: search a Blockchain ledger in MarkitChain
+        - Search for an entry with MarkitChain
+      summary: Search for an entry with MarkitChain
       description: >-
-        search a Blockchain ledger in MarkitChain based on ledger_id
+        Search a Blockchain ledger entry in MarkitChain based on ledger_id
       operationId: SearchMarkitChain
       security:
         - ApiKeyAuth: []
