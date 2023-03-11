@@ -367,11 +367,21 @@ components:
           type: integer
           minLength: 1
           example: 123
-        hash_data:
-          description: hash_data of the customer request body
+        product_type:
+          description: product type
           type: string
-          minLength: 4
-          example: 121rtrt01dffgt56    
+          minLength: 3
+          example: 'handbag'
+        serial_id:
+          description: serial_id for the product
+          type: string
+          minLength: 1
+          example: '1223444'
+        color:
+          description: color of the product
+          type: string
+          minLength: 1
+          example: 'red'    
     SearchMarkitChainResponse:
       type: object
       properties:
