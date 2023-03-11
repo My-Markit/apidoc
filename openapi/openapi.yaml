@@ -20,7 +20,11 @@ tags:
   - name: Webhook confirmation from MarkitPay (Fiat)
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Fiat).
   - name: Webhook confirmation from MarkitPay (Crypto)
-    description: Webhook confirmation from Universal Payment Processor with MarkitPay (Crypto).    
+    description: Webhook confirmation from Universal Payment Processor with MarkitPay (Crypto).
+  - name: Create Supply Chain with MarkitChain
+    description: Create Supply Chain with MarkitChain.        
+  - name: Search Supply Chain with MarkitChain
+    description: Search Supply Chain with MarkitChain.       
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
 paths:
@@ -160,6 +164,74 @@ paths:
               $ref: '#/components/schemas/WebhookCoinbaseRequest'
         description: webhook request body
         required: true
+  /api/v1/markitchain/create:
+    post:
+      tags:
+        - Create Supply Chain with MarkitChain
+      summary: Create a Blockchain ledger in MarkitChain
+      description: >-
+        Create a Blockchain ledger in MarkitChain from customer request
+      operationId: CreateMarkitChain
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              $ref: '#/components/headers/ExpiresAfter'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMarkitChainResponse'
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMarkitChain'
+        description: Create MarkitChain Request Body
+        required: true        
+  /api/v1/markitchain/search:
+    post:
+      tags:
+        - Search Supply Chain with MarkitChain
+      summary: search a Blockchain ledger in MarkitChain
+      description: >-
+        search a Blockchain ledger in MarkitChain based on ledger_id
+      operationId: SearchMarkitChain
+      security:
+        - ApiKeyAuth: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              $ref: '#/components/headers/ExpiresAfter'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchMarkitChainResponse'
+        '401':
+          description: Unauthorized
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchMarkitChain'
+        description: search MarkitChain Request Body
+        required: true          
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -231,6 +303,32 @@ components:
           type: string
           minLength: 1
           example: https://saasdevs.net
+    CreateMarkitChain:
+      type: object
+      properties:
+        product_type:
+          description: product type
+          type: string
+          minLength: 3
+          example: 'handbag'
+        serial_id:
+          description: serial_id for the product
+          type: string
+          minLength: 1
+          example: '1223444'
+        color:
+          description: color of the product
+          type: string
+          minLength: 1
+          example: 'red'       
+    SearchMarkitChain:
+      type: object
+      properties:
+        ledger_id:
+          description: ledger_id of the product customer wants to search
+          type: integer
+          minLength: 1
+          example: 123           
     PaymentCoinbaseResponse:
       type: object
       properties:
@@ -249,6 +347,42 @@ components:
           type: string
           minLength: 1
           example: true
+    CreateMarkitChainResponse:
+      type: object
+      properties:
+        ledger_id:
+          description: unique ledger_id for the customer create request
+          type: integer
+          minLength: 1
+          example: 123
+        hash_data:
+          description: hash_data of the customer request body
+          type: string
+          minLength: 4
+          example: 121rtrt01dffgt56    
+    SearchMarkitChainResponse:
+      type: object
+      properties:
+        ledger_id:
+          description: ledger_id from customer's search request
+          type: integer
+          minLength: 1
+          example: 123
+        product_type:
+          description: product_type of the returned ledger record
+          type: string
+          minLength: 3
+          example: 'handbag'
+        serial_id:
+          description: serial_id for the product
+          type: string
+          minLength: 1
+          example: '1223444'
+        color:
+          description: color of the product
+          type: string
+          minLength: 1
+          example: 'red'                 
     WebhookAdyenRequest:
       type: object
       properties:
