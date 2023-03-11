@@ -232,13 +232,7 @@ paths:
                 $ref: '#/components/schemas/SearchMarkitChainResponse'
         '401':
           description: Unauthorized
-      # requestBody:
-      #   content:
-      #     application/json:
-      #       schema:
-      #         $ref: '#/components/schemas/SearchMarkitChain'
-      #   description: search MarkitChain Request Body
-      #   required: true          
+
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -317,30 +311,28 @@ components:
           description: ledger_id of the product customer wants to create
           type: integer
           minLength: 1
-          example: 123         
-        product_type:
-          description: product type
-          type: string
-          minLength: 3
-          example: 'handbag'
-        serial_id:
-          description: serial_id for the product
-          type: string
-          minLength: 1
-          example: '1223444'
-        color:
-          description: color of the product
-          type: string
-          minLength: 1
-          example: 'red'       
-    # SearchMarkitChain:
-    #   type: object
-    #   properties:
-    #     ledger_id:
-    #       description: ledger_id of the product customer wants to search
-    #       type: integer
-    #       minLength: 1
-    #       example: 123           
+          example: 12345     
+        field_data:   
+          description: field data
+          type: array
+          items: 
+            type: object
+            minLength: 1
+            properties:
+              name:
+                description: name
+                type: string
+                minLength: 1
+              value:
+                description: value
+                type: string
+                minLength: 1
+          example:   
+            - name: item_name
+              value: LV Handbag
+            - name: color
+              value: blue                             
+                
     PaymentCoinbaseResponse:
       type: object
       properties:
@@ -366,22 +358,27 @@ components:
           description: unique ledger_id for the customer create request
           type: integer
           minLength: 1
-          example: 123
-        product_type:
-          description: product type
-          type: string
-          minLength: 3
-          example: 'handbag'
-        serial_id:
-          description: serial_id for the product
-          type: string
-          minLength: 1
-          example: '1223444'
-        color:
-          description: color of the product
-          type: string
-          minLength: 1
-          example: 'red'    
+          example: 12345
+        field_data:   
+          description: field data
+          type: array
+          items: 
+            type: object
+            minLength: 1
+            properties:
+              name:
+                description: name
+                type: string
+                minLength: 1
+              value:
+                description: value
+                type: string
+                minLength: 1
+          example:   
+            - name: item_name
+              value: LV Handbag
+            - name: color
+              value: blue      
     SearchMarkitChainResponse:
       type: object
       properties:
@@ -389,22 +386,27 @@ components:
           description: ledger_id from customer's search request
           type: integer
           minLength: 1
-          example: 123
-        product_type:
-          description: product_type of the returned ledger record
-          type: string
-          minLength: 3
-          example: 'handbag'
-        serial_id:
-          description: serial_id for the product
-          type: string
-          minLength: 1
-          example: '1223444'
-        color:
-          description: color of the product
-          type: string
-          minLength: 1
-          example: 'red'                 
+          example: 12345
+        field_data:   
+          description: field data
+          type: array
+          items: 
+            type: object
+            minLength: 1
+            properties:
+              name:
+                description: name
+                type: string
+                minLength: 1
+              value:
+                description: value
+                type: string
+                minLength: 1
+          example:   
+            - name: item_name
+              value: LV Handbag
+            - name: color
+              value: blue                  
     WebhookAdyenRequest:
       type: object
       properties:
