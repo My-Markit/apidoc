@@ -313,7 +313,7 @@ components:
           minLength: 1
           example: 12345     
         field_data:   
-          description: field data
+          description: field data which can go up to 30 fields, subject to change
           type: array
           items: 
             type: object
