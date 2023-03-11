@@ -199,7 +199,7 @@ paths:
         description: Create MarkitChain Request Body
         required: true        
   /api/v1/markitchain/search:
-    post:
+    get:
       tags:
         - Search Supply Chain with MarkitChain
       summary: search a Blockchain ledger in MarkitChain
@@ -208,6 +208,13 @@ paths:
       operationId: SearchMarkitChain
       security:
         - ApiKeyAuth: []
+      parameters:
+        - name: ledger_id
+          in: query
+          description: ledger_id of the product to be searched for
+          required: true
+          schema:
+            type: string        
       responses:
         '200':
           description: OK
@@ -225,13 +232,13 @@ paths:
                 $ref: '#/components/schemas/SearchMarkitChainResponse'
         '401':
           description: Unauthorized
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SearchMarkitChain'
-        description: search MarkitChain Request Body
-        required: true          
+      # requestBody:
+      #   content:
+      #     application/json:
+      #       schema:
+      #         $ref: '#/components/schemas/SearchMarkitChain'
+      #   description: search MarkitChain Request Body
+      #   required: true          
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -326,14 +333,14 @@ components:
           type: string
           minLength: 1
           example: 'red'       
-    SearchMarkitChain:
-      type: object
-      properties:
-        ledger_id:
-          description: ledger_id of the product customer wants to search
-          type: integer
-          minLength: 1
-          example: 123           
+    # SearchMarkitChain:
+    #   type: object
+    #   properties:
+    #     ledger_id:
+    #       description: ledger_id of the product customer wants to search
+    #       type: integer
+    #       minLength: 1
+    #       example: 123           
     PaymentCoinbaseResponse:
       type: object
       properties:
