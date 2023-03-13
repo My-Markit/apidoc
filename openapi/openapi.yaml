@@ -21,14 +21,14 @@ tags:
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Fiat).
   - name: Webhook confirmation from MarkitPay (Crypto)
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Crypto).
-  - name: Add a single entry record to the chain
-    description: Add a single entry record to the chain.        
-  - name: Retrieve a single entry record from the chain
-    description: Retrieve a single entry record from the chain.       
-  - name: Retrieve a collection of entry records from the chain
-    description: Retrieve a collection of entry records from the chain.      
-  - name: Deprecate a single entry record on the chain
-    description: Deprecate a single entry record on the chain.      
+  - name: Add a single entry record to MarkitChain
+    description: Add a single entry record to MarkitChain.        
+  - name: Retrieve a single entry record from MarkitChain
+    description: Retrieve a single entry record from MarkitChain.       
+  - name: Retrieve a collection of entry records from MarkitChain
+    description: Retrieve a collection of entry records from MarkitChain.      
+  - name: Deprecate a single entry record on MarkitChain
+    description: Deprecate a single entry record on MarkitChain.      
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
 paths:
@@ -171,7 +171,7 @@ paths:
   /api/v1/markitchain/post:
     post:
       tags:
-        - Add a single entry record to the chain
+        - Add a single entry record to MarkitChain
       summary: Create a Blockchain ledger entry in MarkitChain
       description: >-
         Create a Blockchain ledger entry in MarkitChain from customer request
@@ -205,7 +205,7 @@ paths:
   /api/v1/markitchain/entry:
     get:
       tags:
-        - Retrieve a single entry record from the chain
+        - Retrieve a single entry record from MarkitChain
       summary: Retrieve an entry with MarkitChain
       description: >-
         Retrieve a single Blockchain ledger entry in MarkitChain based on ledger_id
@@ -239,7 +239,7 @@ paths:
   /api/v1/markitchain/entries:
     get:
       tags:
-        - Retrieve a collection of entry records from the chain
+        - Retrieve a collection of entry records from MarkitChain
       summary: Retrieve a collection of entry records from MarkitChain
       description: >-
         Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_id's
@@ -273,8 +273,8 @@ paths:
   /api/v1/markitchain/entry_deprecate:
     delete:
       tags:
-        - Deprecate a single entry record on the chain
-      summary: Deprecate a single entry record on the chain
+        - Deprecate a single entry record on MarkitChain
+      summary: Deprecate a single entry record on MarkitChain
       description: >-
         Deprecate a single entry record on the chain in MarkitChain based on ledger_id
       operationId: MarkitChainEntryDeprecate
