@@ -21,10 +21,14 @@ tags:
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Fiat).
   - name: Webhook confirmation from MarkitPay (Crypto)
     description: Webhook confirmation from Universal Payment Processor with MarkitPay (Crypto).
-  - name: Create an entry with MarkitChain
-    description: Create an entry with MarkitChain.        
-  - name: Search for an entry with MarkitChain
-    description: Search for an entry with MarkitChain.       
+  - name: Add a single entry record to the chain
+    description: Add a single entry record to the chain.        
+  - name: Retrieve a single entry record from the chain
+    description: Retrieve a single entry record from the chain.       
+  - name: Retrieve a collection of entry records from the chain
+    description: Retrieve a collection of entry records from the chain.      
+  - name: Deprecate a single entry record on the chain
+    description: Deprecate a single entry record on the chain.      
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
 paths:
@@ -164,14 +168,14 @@ paths:
               $ref: '#/components/schemas/WebhookCoinbaseRequest'
         description: webhook request body
         required: true
-  /api/v1/markitchain/create:
+  /api/v1/markitchain/post:
     post:
       tags:
-        - Create an entry with MarkitChain
+        - Add a single entry record to the chain
       summary: Create a Blockchain ledger entry in MarkitChain
       description: >-
         Create a Blockchain ledger entry in MarkitChain from customer request
-      operationId: CreateMarkitChain
+      operationId: MarkitChainPost
       security:
         - ApiKeyAuth: []
       responses:
@@ -198,14 +202,14 @@ paths:
               $ref: '#/components/schemas/CreateMarkitChain'
         description: Create MarkitChain Request Body
         required: true        
-  /api/v1/markitchain/search:
+  /api/v1/markitchain/entry:
     get:
       tags:
-        - Search for an entry with MarkitChain
-      summary: Search for an entry with MarkitChain
+        - Retrieve a single entry record from the chain
+      summary: Retrieve an entry with MarkitChain
       description: >-
-        Search a Blockchain ledger entry in MarkitChain based on ledger_id
-      operationId: SearchMarkitChain
+        Retrieve a single Blockchain ledger entry in MarkitChain based on ledger_id
+      operationId: MarkitChainEntry
       security:
         - ApiKeyAuth: []
       parameters:
@@ -229,9 +233,77 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchMarkitChainResponse'
+                $ref: '#/components/schemas/EntryMarkitChainResponse'
         '401':
           description: Unauthorized
+  /api/v1/markitchain/entries:
+    get:
+      tags:
+        - Retrieve a collection of entry records from the chain
+      summary: Retrieve a collection of entry records from MarkitChain
+      description: >-
+        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_id's
+      operationId: MarkitChainEntries
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: ledger_id's
+          in: query
+          description: an array of ledger_id's to be searched for
+          required: true
+          schema:
+            type: string        
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              $ref: '#/components/headers/ExpiresAfter'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntriesMarkitChainResponse'
+        '401':
+          description: Unauthorized          
+  /api/v1/markitchain/entry_deprecate:
+    delete:
+      tags:
+        - Deprecate a single entry record on the chain
+      summary: Deprecate a single entry record on the chain
+      description: >-
+        Deprecate a single entry record on the chain in MarkitChain based on ledger_id
+      operationId: MarkitChainEntryDeprecate
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: ledger_id
+          in: query
+          description: ledger_id of the product to be deprecated
+          required: true
+          schema:
+            type: string        
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              $ref: '#/components/headers/ExpiresAfter'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntryDeprecateMarkitChainResponse'
+        '401':
+          description: Unauthorized          
 
 components:
   securitySchemes:
@@ -379,7 +451,7 @@ components:
               value: LV Handbag
             - name: color
               value: blue      
-    SearchMarkitChainResponse:
+    EntryMarkitChainResponse:
       type: object
       properties:
         ledger_id:
@@ -407,6 +479,47 @@ components:
               value: LV Handbag
             - name: color
               value: blue                  
+    EntriesMarkitChainResponse:
+      type: array
+      description: query result entries
+      items:
+        type: object
+        minLength: 1        
+        properties:
+          ledger_id:
+            description: ledger_id's from customer's search request
+            type: integer
+            minLength: 1
+            example: 12345
+          field_data:   
+            description: field data
+            type: array
+            items: 
+              type: object
+              minLength: 1
+              properties:
+                name:
+                  description: name
+                  type: string
+                  minLength: 1
+                value:
+                  description: value
+                  type: string
+                  minLength: 1
+            example:   
+              - name: item_name
+                value: LV Handbag
+              - name: color
+                value: blue                  
+    EntryDeprecateMarkitChainResponse:
+      type: object
+      properties:
+        ledger_id:
+          description: ledger_id removed per customer's deprecate request
+          type: integer
+          minLength: 1
+          example: 12345
+
     WebhookAdyenRequest:
       type: object
       properties:
