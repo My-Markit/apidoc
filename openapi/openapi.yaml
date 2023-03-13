@@ -270,7 +270,7 @@ paths:
                 $ref: '#/components/schemas/EntriesMarkitChainResponse'
         '401':
           description: Unauthorized          
-  /api/v1/markitchain/entry_deprecate:
+  /api/v1/markitchain/entry (delete):
     delete:
       tags:
         - Deprecate a single entry record on MarkitChain
