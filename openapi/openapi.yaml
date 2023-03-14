@@ -175,7 +175,7 @@ paths:
       summary: Create a Blockchain ledger entry in MarkitChain
       description: >-
         Create a Blockchain ledger entry in MarkitChain from customer request
-      operationId: MarkitChainPost
+      operationId: postEntry
       security:
         - ApiKeyAuth: []
       responses:
@@ -209,7 +209,7 @@ paths:
       summary: Retrieve an entry with MarkitChain
       description: >-
         Retrieve a single Blockchain ledger entry in MarkitChain based on ledger_id
-      operationId: MarkitChainEntry
+      operationId: getEntry
       security:
         - ApiKeyAuth: []
       parameters:
@@ -236,48 +236,13 @@ paths:
                 $ref: '#/components/schemas/EntryMarkitChainResponse'
         '401':
           description: Unauthorized
-  /api/v1/markitchain/entries:
-    get:
-      tags:
-        - Retrieve a collection of entry records from MarkitChain
-      summary: Retrieve a collection of entry records from MarkitChain
-      description: >-
-        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_id's
-      operationId: MarkitChainEntries
-      security:
-        - ApiKeyAuth: []
-      parameters:
-        - name: ledger_id's
-          in: query
-          description: an array of ledger_id's to be searched for
-          required: true
-          schema:
-            type: string        
-      responses:
-        '200':
-          description: OK
-          headers:
-            X-Rate-Limit:
-              description: calls per hour allowed by the user
-              schema:
-                type: integer
-                format: int32
-            X-Expires-After:
-              $ref: '#/components/headers/ExpiresAfter'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/EntriesMarkitChainResponse'
-        '401':
-          description: Unauthorized          
-  /api/v1/markitchain/entry (delete):
     delete:
       tags:
         - Deprecate a single entry record on MarkitChain
       summary: Deprecate a single entry record on MarkitChain
       description: >-
         Deprecate a single entry record on the chain in MarkitChain based on ledger_id
-      operationId: MarkitChainEntryDeprecate
+      operationId: deleteEntry
       security:
         - ApiKeyAuth: []
       parameters:
@@ -310,7 +275,41 @@ paths:
             schema:
               $ref: '#/components/schemas/DeleteMarkitChain'
         description: Create MarkitChain Request Body
-        required: true            
+        required: true                
+  /api/v1/markitchain/entries:
+    get:
+      tags:
+        - Retrieve a collection of entry records from MarkitChain
+      summary: Retrieve a collection of entry records from MarkitChain
+      description: >-
+        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_id's
+      operationId: getEntries
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: ledger_id's
+          in: query
+          description: an array of ledger_id's to be searched for
+          required: true
+          schema:
+            type: string        
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              $ref: '#/components/headers/ExpiresAfter'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntriesMarkitChainResponse'
+        '401':
+          description: Unauthorized                    
 
 components:
   securitySchemes:
