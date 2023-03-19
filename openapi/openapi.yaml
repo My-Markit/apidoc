@@ -268,14 +268,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/EntryDeprecateMarkitChainResponse'
         '401':
-          description: Unauthorized          
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/DeleteMarkitChain'
-        description: Create MarkitChain Request Body
-        required: true                
+          description: Unauthorized              
   /api/v1/markitchain/entries:
     get:
       tags:
@@ -409,15 +402,7 @@ components:
             - name: item_name
               value: LV Handbag
             - name: color
-              value: blue     
-    DeleteMarkitChain:
-      type: object
-      properties:
-        ledger_id:
-          description: ledger_id of the product customer wants to deprecate in the chain
-          type: integer
-          minLength: 1
-          example: 12345                                       
+              value: blue                                      
                 
     PaymentCoinbaseResponse:
       type: object
