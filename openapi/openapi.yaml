@@ -292,9 +292,7 @@ paths:
           description: an array of ledger_ids to be searched for
           required: true
           schema:
-            type: array
-            items:
-              type: string        
+            type: string        
       responses:
         '200':
           description: OK
