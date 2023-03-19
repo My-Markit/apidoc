@@ -282,14 +282,14 @@ paths:
         - Retrieve a collection of entry records from MarkitChain
       summary: Retrieve a collection of entry records from MarkitChain
       description: >-
-        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_id's
+        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_is
       operationId: getEntries
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: ledger_id's
+        - name: ledger_ids
           in: query
-          description: an array of ledger_id's to be searched for
+          description: an array of ledger_ids to be searched for
           required: true
           schema:
             type: string        
