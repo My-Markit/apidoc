@@ -11,7 +11,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   x-logo:
     url: https://mymarkit-production.s3.amazonaws.com/img/logos/logo-header.svg
-  description: "This is an **example** API to demonstrate features of the OpenAPI specification.\r\n\r\n# Introduction\r\n\r\nThis API implementation guide is intended to to be a good starting point for\r\nimplementing various MyMarkit SaaS products.\r\n\r\n[Company Site](https://mymarkit.com).\r\n"
+  description: "This is an **example** API to demonstrate features of the OpenAPI specification.\r\n\r\n# Introduction\r\n\r\nThis API implementation guide is intended to to be a good starting point for\r\nimplementing various MyMarkit SaaS products.\r\n\r\n[Company Site](https://mymarkit.com).\r\n\r\nGlobal throttle specification for the API:\r\nRate: 100 requests /sec, Burst: 200 requests , Quota: 2,000 requests /day, Default Timeout: 29 sec"
 tags:
   - name: Payment with MarkitPay (Fiat)
     description: Universal Payment Processor with MarkitPay (Fiat).
@@ -31,6 +31,7 @@ tags:
     description: Deprecate a single entry record on MarkitChain.      
 servers:
   - url: https://8gu4au3nb4.execute-api.us-east-1.amazonaws.com/test
+
 paths:
   /api/v1/payments/adyen:
     post:
@@ -42,7 +43,7 @@ paths:
         dashboard
       operationId: UniversalAdyenPayment
       security:
-        - ApiKeyAuth: []
+        - ApiKeyAuth: []      
       responses:
         '200':
           description: OK
