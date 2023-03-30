@@ -451,6 +451,21 @@ components:
               value: LV Handbag
             - name: color
               value: blue      
+        statusCode:
+          description: HTTP status code
+          type: integer
+          minLength: 1
+          example: 200      
+        timeStamp:
+          description: timestamp of the request
+          type: string
+          minLength: 1
+          example: 2023-03-30T05:00:47.859379    
+        transactionId:
+          description: id of the request
+          type: string
+          minLength: 1
+          example: 017338d5-23bc-48f3-9d0d-f805b3dd63ae                 
     EntryMarkitChainResponse:
       type: object
       properties:
