@@ -209,7 +209,7 @@ paths:
         - Retrieve a single entry record from MarkitChain
       summary: Retrieve an entry with MarkitChain
       description: >-
-        Retrieve a single Blockchain ledger entry in MarkitChain based on ledger_id
+        Retrieve a single Blockchain ledger entry in MarkitChain based on ledger_id, if deprecated return json response saying 'deprecated entry found'
       operationId: getEntry
       security:
         - ApiKeyAuth: []
@@ -276,7 +276,7 @@ paths:
         - Retrieve a collection of entry records from MarkitChain
       summary: Retrieve a collection of entry records from MarkitChain
       description: >-
-        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_is
+        Retrieve a collection of Blockchain ledger entries in MarkitChain based on a collection of ledger_ids, , if any deprecated return json response saying 'deprecated entry found'
       operationId: getEntries
       security:
         - ApiKeyAuth: []
@@ -478,7 +478,22 @@ components:
             - name: item_name
               value: LV Handbag
             - name: color
-              value: blue                  
+              value: blue         
+        statusCode:
+          description: HTTP status code
+          type: integer
+          minLength: 1
+          example: 200      
+        timeStamp:
+          description: timestamp of the request
+          type: string
+          minLength: 1
+          example: 2023-03-30T05:00:47.859379    
+        transactionId:
+          description: id of the request
+          type: string
+          minLength: 1
+          example: 017338d5-23bc-48f3-9d0d-f805b3dd63ae                                      
     EntriesMarkitChainResponse:
       type: array
       description: query result entries
@@ -519,6 +534,21 @@ components:
           type: integer
           minLength: 1
           example: 12345
+        statusCode:
+          description: HTTP status code
+          type: integer
+          minLength: 1
+          example: 200      
+        timeStamp:
+          description: timestamp of the request
+          type: string
+          minLength: 1
+          example: 2023-03-30T05:00:47.859379    
+        transactionId:
+          description: id of the request
+          type: string
+          minLength: 1
+          example: 017338d5-23bc-48f3-9d0d-f805b3dd63ae           
 
     WebhookAdyenRequest:
       type: object
